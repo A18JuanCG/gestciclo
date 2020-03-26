@@ -2,10 +2,21 @@
 
 from odoo import models, fields, api
 
-# class gestciclo(models.Model):
-#     _name = 'gestciclo.gestciclo'
+class Ciclo(models.Model):
+    _name = 'gestciclo.ciclo'
+    _description = 'Ciclo'
 
-#     name = fields.Char()
+    nombre = fields.Char()
+    descripcion = fields.Text()
+
+class Modulo(models.Model):
+    _name = 'gestciclo.modulo'
+    _description = 'Módulo'
+
+    nombre = fields.Char()
+    descripcion = fields.Text()
+    ciclo_id = fields.Many2one('gestciclo.ciclo', ondelete = 'cascade')
+    
 #     value = fields.Integer()
 #     value2 = fields.Float(compute="_value_pc", store=True)
 #     description = fields.Text()

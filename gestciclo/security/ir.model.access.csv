@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_gestciclo_gestciclo,gestciclo.gestciclo,model_gestciclo_gestciclo,,1,0,0,0
+access_gestciclo_ciclo,gestciclo.ciclo,model_gestciclo_ciclo,,1,0,0,0
+access_gestciclo_modulo,gestciclo.modulo,model_gestciclo_modulo,,1,0,0,0

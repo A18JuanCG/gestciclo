@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="gesticlo_ciclo_list">
+      <field name="name">Lista de ciclos</field>
+      <field name="model">gestciclo.ciclo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="descripcion"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="gestciclo_ciclo_action_window">
+      <field name="name">Ciclos</field>
+      <field name="res_model">gestciclo.ciclo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+    
+    <menuitem name="Ciclos FP" id="gestciclo_menu_root"/>
+    
+    <!-- menu categories -->
+    
+    <menuitem name="Ciclos" id="gestciclo_menu_ciclo" parent="gestciclo_menu_root"/>
+    
+    <!-- actions -->
+    
+    <menuitem name="Lista de ciclos" id="gestciclo_menu_ciclo_list" parent="gestciclo_menu_ciclo"
+              action="gestciclo_ciclo_action_window"/>
+  </data>
+</odoo>
