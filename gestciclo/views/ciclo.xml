@@ -7,11 +7,26 @@
       <field name="model">gestciclo.ciclo</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="nombre"/>
-          <field name="descripcion"/>
+          <field name="name" string="Nombre"/>
+          <field name="descripcion" string="Descripción"/>
         </tree>
       </field>
     </record>
+
+    <!-- Form View -->
+
+    <record model="ir.ui.view" id="gestciclo_ciclo_form">
+      <field name="name">Formulario ciclo</field>
+      <field name="model">gestciclo.ciclo</field>
+      <field name="arch" type="xml">
+          <form>
+              <group>
+                <field name="name" string="Nombre"/>
+                <field name="descripcion" string="Descripción"/>
+              </group>
+          </form>
+      </field>
+  </record>
 
     <!-- actions opening views on models -->
     

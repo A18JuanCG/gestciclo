@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+      <!-- explicit list view definition -->
+      
+      <record model="ir.ui.view" id="gestciclo_profesor_list">
+        <field name="name">Lista de profesores</field>
+        <field name="model">gestciclo.profesor</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="partner_id" string="Nombre"/>
+            <field name="fecha_inicio" string="Fecha de inicio"/>
+            <field name="fecha_fin" string="Fecha de fin"/>
+          </tree>
+        </field>
+      </record>
+
+        <!-- Form View -->
+        <record id="gestciclo_profesor_form" model="ir.ui.view">
+            <field name="name">Formulario profesor</field>
+            <field name="model">gestciclo.profesor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="partner_id" string="Nombre" widget="many2one_tags"/>
+                            <field name="fecha_nacimiento" string="Fecha de nacimiento"/>
+                        </group>
+                        <group>
+                            <field name="fecha_inicio" string="Fecha de inicio"/>
+                            <field name="fecha_fin" string="Fecha de fin"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+  
+      <!-- actions opening views on models -->
+      
+      <record model="ir.actions.act_window" id="gestciclo_profesor_action_window">
+        <field name="name">Profesores</field>
+        <field name="res_model">gestciclo.profesor</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+      
+      <!-- menu categories -->
+      
+      <menuitem name="Profesores" id="gestciclo_menu_profesor" parent="gestciclo_menu_root"/>
+      
+      <!-- actions -->
+      
+      <menuitem name="Lista de profesores" id="gestciclo_menu_profesor_list" parent="gestciclo_menu_profesor"
+                action="gestciclo_profesor_action_window"/>
+    </data>
+  </odoo>

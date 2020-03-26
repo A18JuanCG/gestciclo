@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_gestciclo_ciclo,gestciclo.ciclo,model_gestciclo_ciclo,,1,0,0,0
+acces_gestciclo_ciclo_admin,gestciclo.ciclo_admin,model_gestciclo_ciclo,grupo_admin,1,1,1,1
 access_gestciclo_modulo,gestciclo.modulo,model_gestciclo_modulo,,1,0,0,0
+acces_gestciclo_modulo_admin,gestciclo.modulo_admin,model_gestciclo_modulo,grupo_admin,1,1,1,1
+access_gestciclo_profesor,gestciclo.profesor,model_gestciclo_profesor,,1,0,0,0
+acces_gestciclo_profesor_admin,gestciclo.profesor_admin,model_gestciclo_profesor,grupo_admin,1,1,1,1

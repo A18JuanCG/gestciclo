@@ -8,11 +8,30 @@
         <field name="arch" type="xml">
           <tree>
             <field name="ciclo_id"/>
-            <field name="nombre"/>
-            <field name="descripcion"/>
+            <field name="name" string="Nombre"/>
+            <field name="descripcion" string="Descripción"/>
           </tree>
         </field>
       </record>
+
+        <!-- Form View -->
+        <record id="gestciclo_modulo_form" model="ir.ui.view">
+            <field name="name">Formulario módulo</field>
+            <field name="model">gestciclo.modulo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="ciclo_id" widget="many2one_tags"/>
+                        </group>
+                        <group>
+                            <field name="name" string="Nombre"/>
+                            <field name="descripcion" string="Descripción"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
   
       <!-- actions opening views on models -->
       

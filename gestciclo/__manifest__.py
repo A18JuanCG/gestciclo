@@ -20,9 +20,11 @@
 
     # always loaded
     'data': [
+        'security/groups.xml',
         'security/ir.model.access.csv',
         'views/ciclo.xml',
         'views/modulo.xml',
+        'views/profesor.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
