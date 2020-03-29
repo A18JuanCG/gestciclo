@@ -5,3 +5,7 @@ access_gestciclo_modulo,gestciclo.modulo,model_gestciclo_modulo,,1,0,0,0
 acces_gestciclo_modulo_admin,gestciclo.modulo_admin,model_gestciclo_modulo,grupo_admin,1,1,1,1
 access_gestciclo_profesor,gestciclo.profesor,model_gestciclo_profesor,,1,0,0,0
 acces_gestciclo_profesor_admin,gestciclo.profesor_admin,model_gestciclo_profesor,grupo_admin,1,1,1,1
+access_gestciclo_alumno,gestciclo.alumno,model_gestciclo_alumno,,1,0,0,0
+acces_gestciclo_alumno_admin,gestciclo.alumno_admin,model_gestciclo_alumno,grupo_admin,1,1,1,1
+access_gestciclo_modsprof,gestciclo.modsprof,model_gestciclo_modsprof,,1,0,0,0
+acces_gestciclo_modsprof_admin,gestciclo.alumno_modsprof,model_gestciclo_modsprof,grupo_admin,1,1,1,1

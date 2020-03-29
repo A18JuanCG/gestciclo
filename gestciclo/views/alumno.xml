@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+      <!-- explicit list view definition -->
+      
+      <record model="ir.ui.view" id="gestciclo_alumno_list">
+        <field name="name">Lista de alumnos</field>
+        <field name="model">gestciclo.alumno</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="partner_id" string="Nombre"/>
+            <field name="fecha_inicio" string="Fecha de inicio"/>
+            <field name="fecha_fin" string="Fecha de fin"/>
+          </tree>
+        </field>
+      </record>
+
+        <!-- Form View -->
+        <record id="gestciclo_alumno_form" model="ir.ui.view">
+            <field name="name">Formulario alumno</field>
+            <field name="model">gestciclo.alumno</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="partner_id" string="Nombre" widget="many2one_tags"/>
+                            <field name="fecha_nacimiento" string="Fecha de nacimiento"/>
+                        </group>
+                        <group>
+                            <field name="fecha_inicio" string="Fecha de inicio"/>
+                            <field name="fecha_fin" string="Fecha de fin"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+  
+      <!-- actions opening views on models -->
+      
+      <record model="ir.actions.act_window" id="gestciclo_alumno_action_window">
+        <field name="name">Alumnos</field>
+        <field name="res_model">gestciclo.alumno</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+      
+      <!-- menu categories -->
+      
+      <menuitem name="Alumnos" id="gestciclo_menu_alumno" parent="gestciclo_menu_root"/>
+      
+      <!-- actions -->
+      
+      <menuitem name="Lista de alumnos" id="gestciclo_menu_alumno_list" parent="gestciclo_menu_alumno"
+                action="gestciclo_alumno_action_window"/>
+    </data>
+  </odoo>

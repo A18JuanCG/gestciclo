@@ -21,12 +21,13 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
+                      <group>
+                        <field name="ciclo_id" widget="many2one_tags"/>
+                        <field name="name" string="Nombre"/>
+                        <field name="descripcion" string="Descripción"/>
+                    </group>
                         <group>
-                            <field name="ciclo_id" widget="many2one_tags"/>
-                        </group>
-                        <group>
-                            <field name="name" string="Nombre"/>
-                            <field name="descripcion" string="Descripción"/>
+                            <field name="modsprof_ids" widget="one2many_tags"/>
                         </group>
                     </group>
                 </form>

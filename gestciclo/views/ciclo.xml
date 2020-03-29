@@ -24,6 +24,9 @@
                 <field name="name" string="Nombre"/>
                 <field name="descripcion" string="Descripción"/>
               </group>
+              <group>
+                <field name="modulos_ids" widget="one2many_tags"/>
+              </group>
           </form>
       </field>
   </record>
