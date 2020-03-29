@@ -27,7 +27,12 @@
                         <field name="descripcion" string="Descripción"/>
                     </group>
                         <group>
-                            <field name="modsprof_ids" widget="one2many_tags"/>
+                            <field name="modsprof_ids" string="Impartido por">
+                              <tree>
+                                <field name="profesor_id"/>
+                                <field name="curso"/>
+                              </tree>
+                            </field>
                         </group>
                     </group>
                 </form>

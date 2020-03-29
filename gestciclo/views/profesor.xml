@@ -28,13 +28,13 @@
                         <group>
                             <field name="fecha_inicio" string="Fecha de inicio"/>
                             <field name="fecha_fin" string="Fecha de fin"/>
-                            <field name="modsprof_ids" widget="one2many_tags"/>
-                              <!-- <tree>
-                                <field name="ciclo_id" widget="many2one_tags"/>
-                                <field name="name" string="Nombre"/>
-                                <field name="descripcion" string="Descripción"/>
+                            <field name="modsprof_ids" string="Módulos">
+                              <tree>
+                                <field name="ciclo"/>
+                                <field name="modulo_id" string="Módulo"/>
+                                <field name="curso"/>
                               </tree>
-                            </field> -->
+                            </field>
                         </group>
                     </group>
                 </form>
