@@ -8,8 +8,6 @@
         <field name="arch" type="xml">
           <tree>
             <field name="partner_id" string="Nombre"/>
-            <field name="fecha_inicio" string="Fecha de inicio"/>
-            <field name="fecha_fin" string="Fecha de fin"/>
           </tree>
         </field>
       </record>
@@ -26,8 +24,6 @@
                             <field name="nif" string="NIF"/>
                         </group>
                         <group>
-                            <field name="fecha_inicio" string="Fecha de inicio"/>
-                            <field name="fecha_fin" string="Fecha de fin"/>
                             <field name="modsprof_ids" string="Módulos">
                               <tree>
                                 <field name="ciclo"/>

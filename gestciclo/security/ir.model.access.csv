@@ -8,4 +8,8 @@ acces_gestciclo_profesor_admin,gestciclo.profesor_admin,model_gestciclo_profesor
 access_gestciclo_alumno,gestciclo.alumno,model_gestciclo_alumno,,1,0,0,0
 acces_gestciclo_alumno_admin,gestciclo.alumno_admin,model_gestciclo_alumno,grupo_admin,1,1,1,1
 access_gestciclo_modsprof,gestciclo.modsprof,model_gestciclo_modsprof,,1,0,0,0
-acces_gestciclo_modsprof_admin,gestciclo.alumno_modsprof,model_gestciclo_modsprof,grupo_admin,1,1,1,1
+acces_gestciclo_modsprof_admin,gestciclo.modsprof_admin,model_gestciclo_modsprof,grupo_admin,1,1,1,1
+access_gestciclo_modsalum,gestciclo.modsalum,model_gestciclo_modsalum,,1,0,0,0
+acces_gestciclo_modsalum_admin,gestciclo.modsalum_admin,model_gestciclo_modsalum,grupo_admin,1,1,1,1
+access_gestciclo_faltas,gestciclo.faltas,model_gestciclo_faltas,,1,0,0,0
+acces_gestciclo_faltas_admin,gestciclo.faltas_admin,model_gestciclo_faltas,grupo_admin,1,1,1,1

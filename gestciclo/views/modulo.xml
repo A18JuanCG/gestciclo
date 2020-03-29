@@ -25,6 +25,7 @@
                         <field name="ciclo_id" widget="many2one_tags"/>
                         <field name="name" string="Nombre"/>
                         <field name="descripcion" string="Descripción"/>
+                        <field name="horas"/>
                     </group>
                         <group>
                             <field name="modsprof_ids" string="Impartido por">

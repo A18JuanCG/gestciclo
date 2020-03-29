@@ -8,8 +8,6 @@
         <field name="arch" type="xml">
           <tree>
             <field name="partner_id" string="Nombre"/>
-            <field name="fecha_inicio" string="Fecha de inicio"/>
-            <field name="fecha_fin" string="Fecha de fin"/>
           </tree>
         </field>
       </record>
@@ -23,11 +21,22 @@
                     <group>
                         <group>
                             <field name="partner_id" string="Nombre" widget="many2one_tags"/>
+                            <field name="nif" string="NIF"/>
                             <field name="fecha_nacimiento" string="Fecha de nacimiento"/>
                         </group>
                         <group>
-                            <field name="fecha_inicio" string="Fecha de inicio"/>
-                            <field name="fecha_fin" string="Fecha de fin"/>
+                            <field name="modsalum_ids" string="Módulos">
+                              <tree>
+                                <field name="ciclo"/>
+                                <field name="modulo_id" string="Módulo"/>
+                                <field name="curso"/>
+                                <field name="horas"/>
+                                <field name="horas_para_perd_ev"/>
+                                <field name="horas_faltadas"/>
+                                <field name="perdida_evaluacion"/>
+                              </tree>
+                            </field>
+                            <field name="faltas_ids" string="Faltas" widget="one2many_tags"/>
                         </group>
                     </group>
                 </form>
