@@ -24,7 +24,7 @@ class Modulo(models.Model):
     name = fields.Char(required = True)
     descripcion = fields.Text()
     horas = fields.Integer(required = True)
-    ciclo_id = fields.Many2one('gestciclo.ciclo', ondelete = 'cascade')
+    ciclo_id = fields.Many2one('gestciclo.ciclo', ondelete = 'cascade', required = True)
     modsprof_ids = fields.One2many('gestciclo.modsprof', inverse_name = 'modulo_id')
     faltas_ids = fields.One2many('gestciclo.faltas', inverse_name = 'modulo_id')
     contenidos_ids = fields.One2many('gestciclo.contev', inverse_name = 'modulo_id')
@@ -40,7 +40,7 @@ class Profesor(models.Model):
     _name = 'gestciclo.profesor'
     _inherits = {'res.partner': 'partner_id'}
 
-    partner_id = fields.Many2one('res.partner', ondelete = 'cascade')
+    partner_id = fields.Many2one('res.partner', ondelete = 'cascade', required = True)
     modsprof_ids = fields.One2many('gestciclo.modsprof', inverse_name = 'profesor_id')
     nif = fields.Char(required = True)
 
@@ -54,17 +54,17 @@ class ModulosProfesor(models.Model):
     _name = 'gestciclo.modsprof'
     _description = 'Módulos impartidos'
     _rec_name = 'modulo_id'
-    #poner valor default
-    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade')
-    profesor_id = fields.Many2one('gestciclo.profesor', ondelete = 'cascade')
+
+    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
+    profesor_id = fields.Many2one('gestciclo.profesor', ondelete = 'cascade', required = True)
     curso = fields.Char(required = True)
-    ciclo = fields.Char('Ciclo', related = 'modulo_id.ciclo_id.nombre_ciclo')
+    ciclo = fields.Char('Ciclo', related = 'modulo_id.ciclo_id.nombre_ciclo', required = True)
 
 class Alumno(models.Model):
     _name = 'gestciclo.alumno'
     _inherits = {'res.partner': 'partner_id'}
 
-    partner_id = fields.Many2one('res.partner', ondelete='cascade')
+    partner_id = fields.Many2one('res.partner', ondelete='cascade', required = True)
     modsalum_ids = fields.One2many('gestciclo.modsalum', inverse_name = 'alumno_id')
     faltas_ids = fields.One2many('gestciclo.faltas', inverse_name = 'alumno_id')
     notas_cont_ev_ids = fields.One2many('gestciclo.notacontev', inverse_name = 'alumno_id')
@@ -83,10 +83,10 @@ class ModulosAlumno(models.Model):
     _description = 'Módulos matriculado'
     _rec_name = 'modulo_id'
 
-    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade')
-    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade')
+    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
+    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade', required = True)
     curso = fields.Char(required = True)
-    ciclo = fields.Char('Ciclo', related = 'modulo_id.ciclo_id.nombre_ciclo')
+    ciclo = fields.Char('Ciclo', related = 'modulo_id.ciclo_id.nombre_ciclo', required = True)
     horas = fields.Integer('Horas totales del módulo', related = 'modulo_id.horas')
     horas_para_perd_ev = fields.Integer('Horas permitidas para faltas')
     horas_faltadas = fields.Integer('Total de horas faltadas', compute = 'calcular_faltas')
@@ -142,20 +142,20 @@ class Faltas(models.Model):
 class Evaluacion(models.Model):
     _name = 'gestciclo.evaluacion'
 
-    name = fields.Selection([(1, '1ª Evaluación'), (2, '2ª Evaluación'), (3, '3ª Evaluación')], required = True)
+    name = fields.Selection([(1, '1ª Evaluación'), (2, '2ª Evaluación'), (3, '3ª Evaluación')], 'Evaluación', required = True)
     contenidos_ids = fields.One2many('gestciclo.contev', inverse_name = 'evaluacion_id')
     notas_ids = fields.One2many('gestciclo.notaeval', inverse_name = 'evaluacion_id')
 
 class ContenidosEvaluables(models.Model):
     _name = 'gestciclo.contev'
 
-    name = fields.Char('Nombre')
+    name = fields.Char('Nombre', required = True)
     modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
     evaluacion_id = fields.Many2one('gestciclo.evaluacion', ondelete = 'cascade', required = True)
     notas_ids = fields.One2many('gestciclo.notacontev', inverse_name = 'cont_ev_id')
     descripcion = fields.Text()
     tipo = fields.Selection([(1, 'Tarea'), (2, 'Examen')], required = True)
-    porcentaje = fields.Integer('Porcent. en cálculo nota')
+    porcentaje = fields.Integer('Porcent. en cálculo nota', required = True)
 
 class NotaContEv(models.Model):
     _name = 'gestciclo.notacontev'
@@ -163,6 +163,8 @@ class NotaContEv(models.Model):
 
     alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade', required = True)
     cont_ev_id = fields.Many2one('gestciclo.contev', ondelete = 'cascade', required = True)
+    ciclo = fields.Char('Ciclo', related = 'cont_ev_id.modulo_id.ciclo_id.nombre_ciclo', required = True)
+    modulo = fields.Char('Módulo', related = 'cont_ev_id.modulo_id.name', required = True)
     nota = fields.Float(digits = (2,1))
     fecha = fields.Date()
 

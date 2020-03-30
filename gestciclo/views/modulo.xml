@@ -14,6 +14,19 @@
         </field>
       </record>
 
+      <record model="ir.ui.view" id="gestciclo_tareas_list">
+        <field name="name">Lista de tareas</field>
+        <field name="model">gestciclo.contev</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="modulo_id"/>
+            <field name="name"/>
+            <field name="descripcion" string="Descripción"/>
+            <field name="tipo"/>
+          </tree>
+        </field>
+      </record>
+
         <!-- Form View -->
         <record id="gestciclo_modulo_form" model="ir.ui.view">
             <field name="name">Formulario módulo</field>
@@ -56,7 +69,17 @@
         <field name="res_model">gestciclo.modulo</field>
         <field name="view_mode">tree,form</field>
       </record>
-      
+      <record model="ir.actions.act_window" id="gestciclo_tareas_action_window">
+        <field name="name">Tareas</field>
+        <field name="res_model">gestciclo.contev</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+      <record model="ir.actions.act_window" id="gestciclo_eval_action_window">
+        <field name="name">Evaluaciones</field>
+        <field name="res_model">gestciclo.evaluacion</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
       <!-- menu categories -->
       
       <menuitem name="Módulos" id="gestciclo_menu_modulo" parent="gestciclo_menu_root"/>
@@ -65,5 +88,9 @@
       
       <menuitem name="Lista de módulos" id="gestciclo_menu_modulo_list" parent="gestciclo_menu_modulo"
                 action="gestciclo_modulo_action_window"/>
+      <menuitem name="Tareas" id="gestciclo_menu_tareas" parent="gestciclo_menu_modulo"
+                action="gestciclo_tareas_action_window"/>
+      <menuitem name="Evaluaciones" id="gestciclo_menu_eval" parent="gestciclo_menu_modulo"
+                action="gestciclo_eval_action_window"/>
     </data>
   </odoo>

@@ -49,6 +49,8 @@
                         <group>
                           <field name="notas_cont_ev_ids" string="Tareas y exámenes">
                             <tree>
+                              <field name="ciclo"/>
+                              <field name="modulo"/>
                               <field name="cont_ev_id"/>
                               <field name="fecha"/>
                               <field name="nota"/>
