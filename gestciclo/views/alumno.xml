@@ -31,12 +31,38 @@
                                 <field name="modulo_id" string="Módulo"/>
                                 <field name="curso"/>
                                 <field name="horas"/>
+                                <field name="nota_final"/>
                                 <field name="horas_para_perd_ev"/>
                                 <field name="horas_faltadas"/>
                                 <field name="perdida_evaluacion"/>
                               </tree>
                             </field>
-                            <field name="faltas_ids" string="Faltas" widget="one2many_tags"/>
+                            <field name="faltas_ids">
+                              <tree>
+                                <field name="modulo_id"/>
+                                <field name="tipo"/>
+                                <field name="fecha"/>
+                                <field name="horas"/> 
+                              </tree>
+                            </field>
+                        </group>
+                        <group>
+                          <field name="notas_cont_ev_ids" string="Tareas y exámenes">
+                            <tree>
+                              <field name="cont_ev_id"/>
+                              <field name="fecha"/>
+                              <field name="nota"/>
+                            </tree>
+                          </field>
+                          <field name="notas_ids" string="Evaluaciones">
+                            <tree>
+                              <field name="curso"/>
+                              <field name="evaluacion_id"/>
+                              <field name="modulo_id"/>
+                              <field name="fecha"/>
+                              <field name="nota"/>
+                            </tree>
+                          </field>
                         </group>
                     </group>
                 </form>

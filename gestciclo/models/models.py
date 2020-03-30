@@ -27,6 +27,8 @@ class Modulo(models.Model):
     ciclo_id = fields.Many2one('gestciclo.ciclo', ondelete = 'cascade')
     modsprof_ids = fields.One2many('gestciclo.modsprof', inverse_name = 'modulo_id')
     faltas_ids = fields.One2many('gestciclo.faltas', inverse_name = 'modulo_id')
+    contenidos_ids = fields.One2many('gestciclo.contev', inverse_name = 'modulo_id')
+    notas_ids = fields.One2many('gestciclo.notaeval', inverse_name = 'modulo_id')
 
     @api.constrains('name')
     def _check_name(self):
@@ -65,6 +67,8 @@ class Alumno(models.Model):
     partner_id = fields.Many2one('res.partner', ondelete='cascade')
     modsalum_ids = fields.One2many('gestciclo.modsalum', inverse_name = 'alumno_id')
     faltas_ids = fields.One2many('gestciclo.faltas', inverse_name = 'alumno_id')
+    notas_cont_ev_ids = fields.One2many('gestciclo.notacontev', inverse_name = 'alumno_id')
+    notas_ids = fields.One2many('gestciclo.notaeval', inverse_name = 'alumno_id')
     nif = fields.Char(required = True)
     fecha_nacimiento = fields.Date('Fecha de nacimiento')
 
@@ -87,6 +91,7 @@ class ModulosAlumno(models.Model):
     horas_para_perd_ev = fields.Integer('Horas permitidas para faltas')
     horas_faltadas = fields.Integer('Total de horas faltadas', compute = 'calcular_faltas')
     perdida_evaluacion = fields.Boolean('Pérdida de evaluación continua', compute = 'calcular_perdida_ev', readonly = True)
+    nota_final = fields.Float('Nota final', compute = 'calcular_nota_final', digits = (2,1), readonly = True)
 
     @api.depends('horas_faltadas', 'horas_para_perd_ev')
     def calcular_perdida_ev(self):
@@ -98,25 +103,88 @@ class ModulosAlumno(models.Model):
         faltas = self.env['gestciclo.faltas']
         for record in self:
             total_horas = 0
+            contador_puntualidad = 0
             for falta in faltas.search([('alumno_id.id', '=', record.alumno_id.id), ('modulo_id.id', '=', record.modulo_id.id)]):
-                total_horas += falta.horas
+                if falta.tipo == 'puntualidad':
+                    contador_puntualidad += 1
+                    if contador_puntualidad >= 5:
+                        total_horas += 1
+                        contador_puntualidad = 0
+                else:
+                    total_horas += falta.horas
             record.horas_faltadas = total_horas
-        #return sum(self.env['gestciclo.faltas'].search[('alumno_id.id', '=', self.alumno_id.id), ('modulo_id.id', '=', self.modulo_id.id)]).mapped('horas')
+
+    @api.model
+    def calcular_nota_final(self):
+        notas = self.env['gestciclo.notaeval']
+        for record in self:
+            nota_f = 0
+            contador = 0
+            for nota in notas.search([('alumno_id.id', '=', record.alumno_id.id), ('modulo_id.id', '=', record.modulo_id.id)]):
+                nota_f += nota.nota
+                contador += 1
+            if contador > 0:
+                record.nota_final = nota_f / contador
+            else:
+                record.nota_final = 0
 
 class Faltas(models.Model):
     _name = 'gestciclo.faltas'
     _description = 'Faltas del alumno'
     _rec_name = 'modulo_id'
 
-    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade')
-    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade')
-    tipo = fields.Selection([('asistencia', 'Asistencia'), ('puntualidad', 'Puntualidad')])
+    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
+    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade', required = True)
+    tipo = fields.Selection([('asistencia', 'Asistencia'), ('puntualidad', 'Puntualidad')], required = True)
     fecha = fields.Date()
     horas = fields.Integer()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+
+class Evaluacion(models.Model):
+    _name = 'gestciclo.evaluacion'
+
+    name = fields.Selection([(1, '1ª Evaluación'), (2, '2ª Evaluación'), (3, '3ª Evaluación')], required = True)
+    contenidos_ids = fields.One2many('gestciclo.contev', inverse_name = 'evaluacion_id')
+    notas_ids = fields.One2many('gestciclo.notaeval', inverse_name = 'evaluacion_id')
+
+class ContenidosEvaluables(models.Model):
+    _name = 'gestciclo.contev'
+
+    name = fields.Char('Nombre')
+    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
+    evaluacion_id = fields.Many2one('gestciclo.evaluacion', ondelete = 'cascade', required = True)
+    notas_ids = fields.One2many('gestciclo.notacontev', inverse_name = 'cont_ev_id')
+    descripcion = fields.Text()
+    tipo = fields.Selection([(1, 'Tarea'), (2, 'Examen')], required = True)
+    porcentaje = fields.Integer('Porcent. en cálculo nota')
+
+class NotaContEv(models.Model):
+    _name = 'gestciclo.notacontev'
+    _rec_name = 'alumno_id'
+
+    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade', required = True)
+    cont_ev_id = fields.Many2one('gestciclo.contev', ondelete = 'cascade', required = True)
+    nota = fields.Float(digits = (2,1))
+    fecha = fields.Date()
+
+class NotaEvaluacion(models.Model):
+    _name = 'gestciclo.notaeval'
+    _rec_name = 'alumno_id'
+
+    alumno_id = fields.Many2one('gestciclo.alumno', ondelete = 'cascade', required = True)
+    evaluacion_id = fields.Many2one('gestciclo.evaluacion', ondelete = 'cascade', required = True)
+    modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
+
+    fecha = fields.Date()
+    curso = fields.Char(required = True)
+    nota = fields.Float(compute = 'calcular_nota_eval', digits = (2,1), readonly = True)
+
+    @api.model
+    def calcular_nota_eval(self):
+        notas = self.env['gestciclo.notacontev']
+        for record in self:
+            total = 0
+            for nota in notas.search([('alumno_id.id', '=', record.alumno_id.id),
+                                    ('cont_ev_id.evaluacion_id.id', '=', record.evaluacion_id.id),
+                                    ('cont_ev_id.modulo_id.id', '=', record.modulo_id.id)]):
+                total += (nota.nota * nota.cont_ev_id.porcentaje) / 100
+            record.nota = total

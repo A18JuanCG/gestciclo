@@ -13,3 +13,11 @@ access_gestciclo_modsalum,gestciclo.modsalum,model_gestciclo_modsalum,,1,0,0,0
 acces_gestciclo_modsalum_admin,gestciclo.modsalum_admin,model_gestciclo_modsalum,grupo_admin,1,1,1,1
 access_gestciclo_faltas,gestciclo.faltas,model_gestciclo_faltas,,1,0,0,0
 acces_gestciclo_faltas_admin,gestciclo.faltas_admin,model_gestciclo_faltas,grupo_admin,1,1,1,1
+access_gestciclo_evaluacion,gestciclo.evaluacion,model_gestciclo_evaluacion,,1,0,0,0
+acces_gestciclo_evaluacion_admin,gestciclo.evaluacion_admin,model_gestciclo_evaluacion,grupo_admin,1,1,1,1
+access_gestciclo_contev,gestciclo.contev,model_gestciclo_contev,,1,0,0,0
+acces_gestciclo_contev_admin,gestciclo.contev_admin,model_gestciclo_contev,grupo_admin,1,1,1,1
+access_gestciclo_notacontev,gestciclo.notacontev,model_gestciclo_notacontev,,1,0,0,0
+acces_gestciclo_notacontev_admin,gestciclo.notacontev_admin,model_gestciclo_notacontev,grupo_admin,1,1,1,1
+access_gestciclo_notaeval,gestciclo.notaeval,model_gestciclo_notaeval,,1,0,0,0
+acces_gestciclo_notaeval_admin,gestciclo.notaeval_admin,model_gestciclo_notaeval,grupo_admin,1,1,1,1

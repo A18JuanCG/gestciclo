@@ -26,15 +26,24 @@
                         <field name="name" string="Nombre"/>
                         <field name="descripcion" string="Descripción"/>
                         <field name="horas"/>
-                    </group>
-                        <group>
-                            <field name="modsprof_ids" string="Impartido por">
-                              <tree>
-                                <field name="profesor_id"/>
-                                <field name="curso"/>
-                              </tree>
-                            </field>
-                        </group>
+                      </group>
+                      <group>
+                          <field name="modsprof_ids" string="Impartido por">
+                            <tree>
+                              <field name="profesor_id"/>
+                              <field name="curso"/>
+                            </tree>
+                          </field>
+                      </group>
+                      <group>
+                        <field name="contenidos_ids" string="Tareas y exámenes">
+                          <tree>
+                            <field name="evaluacion_id" string="Evaluación"/>
+                            <field name="name"/>
+                            <field name="tipo"/>
+                          </tree>
+                        </field>
+                      </group>
                     </group>
                 </form>
             </field>
