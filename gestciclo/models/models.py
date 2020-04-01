@@ -11,9 +11,9 @@ class Ciclo(models.Model):
     descripcion = fields.Text()
     modulos_ids = fields.One2many('gestciclo.modulo', inverse_name = 'ciclo_id')
 
-    @api.constrains('name')
+    @api.constrains('nombre_ciclo')
     def _check_name(self):
-        partner_rec = self.env['gestciclo.ciclo'].search([('name', '=', self.name), ('id', '!=', self.id)])
+        partner_rec = self.env['gestciclo.ciclo'].search([('nombre_ciclo', '=', self.nombre_ciclo), ('id', '!=', self.id)])
         if partner_rec:
             raise ValueError(('El ciclo ya existe'))
 
@@ -138,6 +138,13 @@ class Faltas(models.Model):
     tipo = fields.Selection([('asistencia', 'Asistencia'), ('puntualidad', 'Puntualidad')], required = True)
     fecha = fields.Date()
     horas = fields.Integer()
+
+    @api.constrains('modulo_id')
+    def _check_name(self):
+        modulos = self.env['gestciclo.modsalum']
+        for record in self:
+            if len(modulos.search([('modulo_id.id', '=', record.modulo_id.id), ('alumno_id.id', '=', record.alumno_id.id)])) == 0:
+                raise ValueError(('El alumno no está matriculado en el módulo'))
 
 class Evaluacion(models.Model):
     _name = 'gestciclo.evaluacion'
