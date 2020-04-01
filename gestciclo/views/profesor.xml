@@ -12,6 +12,19 @@
         </field>
       </record>
 
+      <record model="ir.ui.view" id="gestciclo_modsprof_list">
+        <field name="name">Lista de módulos</field>
+        <field name="model">gestciclo.modsprof</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="profesor_id" string="Nombre"/>
+            <field name="modulo_id" string="Módulo"/>
+            <field name="ciclo"/>
+            <field name="curso"/>
+          </tree>
+        </field>
+      </record>
+
         <!-- Form View -->
         <record id="gestciclo_profesor_form" model="ir.ui.view">
             <field name="name">Formulario profesor</field>
@@ -36,12 +49,33 @@
                 </form>
             </field>
         </record>
+
+        <record id="gestciclo_modsprof_form" model="ir.ui.view">
+          <field name="name">Formulario módulos profesores</field>
+          <field name="model">gestciclo.modsprof</field>
+          <field name="arch" type="xml">
+              <form>
+                  <group>
+                    <field name="modulo_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                    <field name="profesor_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                    <field name="ciclo"/>
+                    <field name="curso"/>
+                  </group>
+              </form>
+          </field>
+        </record>
   
       <!-- actions opening views on models -->
       
       <record model="ir.actions.act_window" id="gestciclo_profesor_action_window">
         <field name="name">Profesores</field>
         <field name="res_model">gestciclo.profesor</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.actions.act_window" id="gestciclo_modsprof_action_window">
+        <field name="name">Módulos profesores</field>
+        <field name="res_model">gestciclo.modsprof</field>
         <field name="view_mode">tree,form</field>
       </record>
       
@@ -52,6 +86,9 @@
       <!-- actions -->
       
       <menuitem name="Lista de profesores" id="gestciclo_menu_profesor_list" parent="gestciclo_menu_profesor"
-                action="gestciclo_profesor_action_window"/>
+                action="gestciclo_profesor_action_window"/> 
+
+      <menuitem name="Añadir módulos" id="gestciclo_menu_modsprof_list" parent="gestciclo_menu_profesor"
+                action="gestciclo_modsprof_action_window"/>
     </data>
   </odoo>

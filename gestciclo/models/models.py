@@ -150,6 +150,7 @@ class ContenidosEvaluables(models.Model):
     _name = 'gestciclo.contev'
 
     name = fields.Char('Nombre', required = True)
+    ciclo = fields.Char('Ciclo', related = 'modulo_id.ciclo_id.nombre_ciclo', required = True)
     modulo_id = fields.Many2one('gestciclo.modulo', ondelete = 'cascade', required = True)
     evaluacion_id = fields.Many2one('gestciclo.evaluacion', ondelete = 'cascade', required = True)
     notas_ids = fields.One2many('gestciclo.notacontev', inverse_name = 'cont_ev_id')

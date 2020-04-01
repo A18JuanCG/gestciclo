@@ -12,6 +12,34 @@
         </field>
       </record>
 
+      <record model="ir.ui.view" id="gestciclo_modsalum_list">
+        <field name="name">Lista de módulos</field>
+        <field name="model">gestciclo.modsalum</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="alumno_id" string="Nombre"/>
+            <field name="ciclo"/>
+            <field name="modulo_id" string="Módulo"/>
+            <field name="curso"/>
+          </tree>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="gestciclo_faltas_list">
+        <field name="name">Lista de faltas</field>
+        <field name="model">gestciclo.faltas</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="alumno_id" string="Nombre"/>
+            <field name="modulo_id" string="Módulo"/>
+            <field name="tipo"/>
+            <field name="fecha"/>
+            <field name="horas"/>
+          </tree>
+        </field>
+      </record>
+
+
         <!-- Form View -->
         <record id="gestciclo_alumno_form" model="ir.ui.view">
             <field name="name">Formulario alumno</field>
@@ -70,12 +98,64 @@
                 </form>
             </field>
         </record>
+
+        <record id="gestciclo_modsalum_form" model="ir.ui.view">
+          <field name="name">Formulario módulos alumnos</field>
+          <field name="model">gestciclo.modsalum</field>
+          <field name="arch" type="xml">
+              <form>
+                  <group>
+                    <group>
+                      <field name="modulo_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                      <field name="alumno_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                      <field name="ciclo"/>
+                      <field name="curso"/>
+                      <field name="nota_final"/>
+                    </group>
+                    <group>
+                      <field name="horas"/>
+                      <field name="horas_para_perd_ev"/>
+                      <field name="horas_faltadas"/>
+                      <field name="perdida_evaluacion"/>
+                    </group>
+                  </group>
+              </form>
+          </field>
+        </record>
+        
+        <record id="gestciclo_faltas_form" model="ir.ui.view">
+          <field name="name">Formulario faltas alumnos</field>
+          <field name="model">gestciclo.faltas</field>
+          <field name="arch" type="xml">
+              <form>
+                  <group>
+                    <field name="modulo_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                    <field name="alumno_id" widget="many2one_tags" options="{'no_create_edit': True}"/>
+                    <field name="tipo"/>
+                    <field name="fecha"/>
+                    <field name="horas"/>
+                  </group>
+              </form>
+          </field>
+        </record>
   
       <!-- actions opening views on models -->
       
       <record model="ir.actions.act_window" id="gestciclo_alumno_action_window">
         <field name="name">Alumnos</field>
         <field name="res_model">gestciclo.alumno</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.actions.act_window" id="gestciclo_modsalum_action_window">
+        <field name="name">Módulos alumnos</field>
+        <field name="res_model">gestciclo.modsalum</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.actions.act_window" id="gestciclo_faltas_action_window">
+        <field name="name">Faltas</field>
+        <field name="res_model">gestciclo.faltas</field>
         <field name="view_mode">tree,form</field>
       </record>
       
@@ -87,5 +167,9 @@
       
       <menuitem name="Lista de alumnos" id="gestciclo_menu_alumno_list" parent="gestciclo_menu_alumno"
                 action="gestciclo_alumno_action_window"/>
+      <menuitem name="Añadir módulos" id="gestciclo_menu_modsalum_list" parent="gestciclo_menu_alumno"
+                action="gestciclo_modsalum_action_window"/>
+      <menuitem name="Gestión de faltas" id="gestciclo_menu_faltas_list" parent="gestciclo_menu_alumno"
+                action="gestciclo_faltas_action_window"/>
     </data>
   </odoo>
