@@ -13,3 +13,12 @@ El ejercicio incide especialmente en la parte del servidor, estando la interfaz 
 ![Interfaz del módulo](/doc/img/ciclos1.png)
 *Interfaz del módulo*
 
+## Guía de uso
+
+1. Crear un **ciclo**
+2. En Módulos/Lista de módulos, crear un  **módulo** perteneciente a ese ciclo
+3. Crear un **profesor** y añadirlo al módulo anteriormente creado.
+4. Crear un **alumno** y añadirle el módulo que vaya a cursar
+5. En Módulos/Evaluaciones, crear una o varias **evaluaciones**
+6. En Módulos/Tareas, crear las **tareas o exámenes** para el módulo deseado y la evaluación correspondiente, teniendo en cuenta señalar el porcentaje que supondrá en la evaluación
+7. Añadir a cada tarea los alumnos que la hayan tenido que realizar y su nota
