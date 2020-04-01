@@ -21,4 +21,5 @@ El ejercicio incide especialmente en la parte del servidor, estando la interfaz 
 4. Crear un **alumno** y añadirle el módulo que vaya a cursar
 5. En Módulos/Evaluaciones, crear una o varias **evaluaciones**
 6. En Módulos/Tareas, crear las **tareas o exámenes** para el módulo deseado y la evaluación correspondiente, teniendo en cuenta señalar el porcentaje que supondrá en la evaluación
-7. Añadir a cada tarea los alumnos que la hayan tenido que realizar y su nota
+7. Editar el alumno y añadir cada tarea  que haya tenido que realizar y su nota
+8. En Alumnos/Gestión de faltas, añadir las faltas que haya tenido cada alumno
